@@ -1,0 +1,96 @@
+<form>
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input class="form-control" type="text" name="username" id="username" placeholder="Enter Username" />
+    </div>
+    <div class="form-group">
+        <label for="fullname">Full Name</label>
+        <input class="form-control" type="text" name="fullname" id="fullname" placeholder="Enter Full Name" />
+    </div>
+
+    <div class="form-group">
+        <label for="email">Date of Birth</label>
+        <input class="form-control" type="date" name="dob" id="dob" placeholder="Enter Dob" />
+    </div>
+    <div class="form-group">
+        <label for="fullname">Contact</label>
+        <input class="form-control" type="text" name="contact" id="contact" placeholder="Enter contact" />
+    </div>
+    <div class="form-group">
+        <label for="fullname">T1 marks</label>
+        <input class="form-control" type="number" name="markst1" id="markst1" placeholder="Enter T1 marks" />
+    </div>
+    <div class="form-group">
+        <label for="fullname">T2 marks</label>
+        <input class="form-control" type="number" name="markst2" id="markst2" placeholder="Enter T2 marks" />
+    </div>
+    <div class="form-group">
+        <label for="fullname">Final Exam Marks</label>
+        <input class="form-control" type="number" name="marksF" id="marksF" placeholder="Enter Final marks" />
+    </div>
+
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input class="form-control" type="password" name="password" id="password" placeholder="Enter Password" />
+    </div>
+    <div class="form-group">
+        <label for="key">Key</label>
+        <input class="form-control" type="password" name="key" id="key" placeholder="Enter Key" />
+    </div>
+</form>
+<button class="btn btn-primary" onclick="register()" style="text-decoration: none;">Register</button>
+<br /> Don't have key? Contact Us now!
+<br />
+<div id="status"></div>
+
+</div>
+
+
+<script>
+    var register = () => {
+        var data = {
+            'password': document.getElementById("password").value,
+            'username': document.getElementById("username").value,
+            'fullname': document.getElementById("fullname").value,
+            'dob': document.getElementById("dob").value,
+            'contact': document.getElementById("contact").value,
+            'markst1': document.getElementById("markst1").value,
+            'markst2': document.getElementById("markst2").value,
+            'marksF': document.getElementById("marksF").value,
+            'key': document.getElementById("key").value
+        };
+        console.log(data);
+
+        var status = $("#status");
+
+        $.ajax({
+            type: "POST",
+            url: "/auth/register",
+            data: JSON.stringify(data),
+            contentType: "application/json",
+
+            dataType: 'json',
+            success: (res) => {
+                console.log("success", res);
+
+                if (res.success) {
+
+                    status.html(res.msg);
+                    status.css("color", "green");
+                } else {
+                    status.html(res.msg);
+                    status.css("color", "red");
+                }
+
+
+
+            },
+            error: (err) => {
+                console.log("err", err.responseJSON.msg);
+                status.html(err.responseJSON.msg);
+                status.css("color", "red");
+
+            }
+        })
+    }
+</script>

@@ -1,0 +1,68 @@
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+<br />
+<br />
+<h3>Welcome
+    <%= user.fullname %>
+
+
+</h3>
+MIS:
+<%= user.username %> <br>
+Contact:
+<%= user.contact %> <br>
+Date of Birth:
+<%= user.dob %> <br>
+
+
+<table>
+    <tr>
+
+        <th>MIS</th>
+        <th>Marks T1</th>
+        <th>Marks T2</th>
+        <th>Marks Final Exam</th>
+        <th>Total Marks</th>
+    </tr>
+    <% for (var i=0 ; i < ad.length; i++ ) { %>
+    <tr>
+        <td>
+            <%= ad[i].username %>
+        </td>
+        <td>
+            <%= ad[i].markst1 %>
+        </td>
+        <td>
+            <%= ad[i].markst2 %>
+        </td>
+        <td>
+            <%= ad[i].marksF %>
+        </td>
+        <td>
+            <%= ad[i].markst1 + ad[i].markst2 + ad[i].marksF  %>
+        </td>
+    </tr>
+    <% } %>
+</table>
+
+
+
+
+
+</html>
